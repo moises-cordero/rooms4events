@@ -35,12 +35,12 @@ class CreateEventView(generics.CreateAPIView):
     serializer_class = EventSerializer
 
 
-class ListPublicEventsView(generics.ListAPIView):
-    queryset = Event.objects.filter(type='public')
+class ListEventsAvailableView(generics.ListAPIView):
+    queryset = Event.objects.filter(type='public', available=True)
     serializer_class = EventSerializer
 
 
-class BookingView(generics.CreateAPIView):
+class CreateBookingView(generics.CreateAPIView):
     serializer_class = BookingSerializer
 
 
@@ -48,3 +48,7 @@ class DeleteBookingView(MultipleFieldLookup, generics.DestroyAPIView):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
     lookup_fields = ('customer', 'event_name')
+
+    def perform_destroy(self, instance):
+        instance.event.available = True
+        instance.event.save()

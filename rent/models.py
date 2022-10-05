@@ -13,7 +13,11 @@ class Event(models.Model):
     name = models.CharField(max_length=100, unique=True, null=False)
     room_number = models.SmallIntegerField(null=False)
     room = models.OneToOneField('Room', on_delete=models.PROTECT, null=False)
+    available = models.BooleanField(default=True, null=False)
     date = models.DateField(null=False, unique=True)
+
+    class Meta:
+        unique_together = ['room', 'date']
 
 
 class Booking(models.Model):

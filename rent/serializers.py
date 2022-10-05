@@ -29,14 +29,25 @@ class BookingSerializer(serializers.ModelSerializer):
         validated_data['event'] = Event.objects.get(name=validated_data['event_name'])
 
         if validated_data['event'].type == 'private':
-            raise serializers.ValidationError(_('You cannot book a place because the event is private'))
+            raise serializers.ValidationError(
+                _('Cannot book a place: The event is private')
+                )
 
         room = validated_data['event'].room
-        if Booking.objects.filter(event__room=room).count() >= room.capacity:
-            raise serializers.ValidationError(_('There is no longer space available for this room'))
+        date = validated_data['event'].date
+        count = Booking.objects.filter(event__room=room, event__date=date).count()
+        if count >= room.capacity:
+            raise serializers.ValidationError(
+                _('Cannot book a place: There is no longer space available for this event')
+                )
 
         try:
             booking = Booking.objects.create(**validated_data)
+            if count + 1 >= room.capacity:
+                validated_data['event'].available = False
+                validated_data['event'].save()
         except IntegrityError as ex:
-            raise serializers.ValidationError(_('You already have a place booked for this event'))
+            raise serializers.ValidationError(
+                _('Cannot book a place: You already have a place booked for this event')
+                ) from ex
         return booking
