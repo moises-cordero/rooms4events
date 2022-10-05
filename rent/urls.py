@@ -9,5 +9,5 @@ urlpatterns = [
     path('event', CreateEventView.as_view(), name='event'),
     path('events', ListPublicEventsView.as_view(), name='events'),
     path('booking', BookingView.as_view(), name='booking'),
-    path('booking/<str:customer>', DeleteBookingView.as_view(), name='booking'),
+    path('booking/<str:customer>/<str:event_name>', DeleteBookingView.as_view(), name='booking'),
 ]
