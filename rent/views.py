@@ -1,37 +1,36 @@
-from rest_framework import generics
+from rest_framework import generics, permissions
+from django.shortcuts import get_object_or_404
 from rent.models import Room, Event, Booking
 from rent.serializers import RoomSerializer, EventSerializer, BookingSerializer
-from rest_framework.permissions import IsAuthenticated
-from django.shortcuts import get_object_or_404
 
 
-class MultipleFieldLookup(object):
+class MultipleFieldLookup():
     def get_object(self):
         queryset = self.get_queryset()
         queryset = self.filter_queryset(queryset)
-        filter = {}
+        filter_dict = {}
         for field in self.lookup_fields:
             try:
-                filter[field] = self.kwargs[field]
+                filter_dict[field] = self.kwargs[field]
             except Exception:
                 pass
-        return get_object_or_404(queryset, **filter)
+        return get_object_or_404(queryset, **filter_dict)
 
 
 class CreateRoomView(generics.CreateAPIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = RoomSerializer
 
 
 class DeleteRoomView(generics.DestroyAPIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
     lookup_field = 'number'
 
 
 class CreateEventView(generics.CreateAPIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = EventSerializer
 
 

@@ -1,7 +1,7 @@
-from rent.models import Room, Event, Booking
 from rest_framework import serializers
 from django.utils.translation import gettext as _
 from django.db.utils import IntegrityError
+from rent.models import Room, Event, Booking
 
 class RoomSerializer(serializers.ModelSerializer):
     class Meta:
