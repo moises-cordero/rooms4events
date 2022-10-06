@@ -1,3 +1,6 @@
 Django
 djangorestframework
 pytest-django
+pytest-mock
+django-mock-queries
+six
