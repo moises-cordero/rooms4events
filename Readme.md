@@ -39,4 +39,4 @@ $ pytest
 | Create event | POST | localhost:\<port\>/event | Basic Auth (username, password) | type (str), name (str), room_number (int), date (date) |
 | Create booking | POST | localhost:\<port\>/booking |  | customer (str), event_name (str) |
 | Delete booking | DELETE | localhost:\<port\>/booking/\<str:customer\>/\<str:event_name\> |  |  |
-| List available events | GET | localhost:\<port\>/events-available |  |  |
+| List available events | GET | localhost:\<port\>/events/available |  |  |
