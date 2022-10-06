@@ -4,13 +4,13 @@ from django_mock_queries.query import MockSet
 from rest_framework.test import force_authenticate
 from django.urls import reverse
 from django.contrib.auth.models import User
-from rent.models import Room, Event, Booking
-from rent.views import CreateRoomView, CreateEventView, CreateBookingView
-from rent.views import ListEventsAvailableView
-from rent.views import DeleteRoomView, DeleteBookingView
+from book.models import Room, Event, Booking
+from book.views import CreateRoomView, CreateEventView, CreateBookingView
+from book.views import ListEventsAvailableView
+from book.views import DeleteRoomView, DeleteBookingView
 
 
-@pytest.mark.urls('rent.urls')
+@pytest.mark.urls('book.urls')
 @pytest.mark.django_db
 class Tests:
 

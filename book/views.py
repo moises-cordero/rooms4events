@@ -1,7 +1,7 @@
 from rest_framework import generics, permissions
 from django.shortcuts import get_object_or_404
-from rent.models import Room, Event, Booking
-from rent.serializers import RoomSerializer, EventSerializer, BookingSerializer
+from book.models import Room, Event, Booking
+from book.serializers import RoomSerializer, EventSerializer, BookingSerializer
 
 
 class MultipleFieldLookup():
