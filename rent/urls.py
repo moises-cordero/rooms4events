@@ -1,6 +1,7 @@
 from django.urls import path
-from rent.views import CreateRoomView, DeleteRoomView, CreateEventView, CreateBookingView
-from rent.views import ListEventsAvailableView, DeleteBookingView
+from rent.views import CreateRoomView, CreateEventView, CreateBookingView
+from rent.views import ListEventsAvailableView
+from rent.views import DeleteRoomView, DeleteBookingView
 
 
 urlpatterns = [
