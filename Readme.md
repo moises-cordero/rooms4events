@@ -1,4 +1,4 @@
-# Booking place for an event
+# Renting rooms for events
 ###### Django API for technical challenge.
 #
 
